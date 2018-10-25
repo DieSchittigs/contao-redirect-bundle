@@ -1,8 +1,8 @@
 {
     "name": "dieschittigs/contao-redirect-bundle",
-    "description": "",
+    "description": "Manage redirects in the contao backend",
     "type": "contao-bundle",
-    "keywords":["contao"],
+    "keywords":["contao","redirect","htaccess","regex","bundle"],
     "require": {
         "php": "^5.6|^7.0",
         "contao/core-bundle": "^4.4"
