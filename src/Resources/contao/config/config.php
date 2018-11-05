@@ -9,15 +9,24 @@
  */
 
  $GLOBALS['TL_MODELS']['tl_redirect'] = 'DieSchittigs\\SttgsRedirect\\Models\\RedirectModel';
+ $GLOBALS['TL_MODELS']['tl_redirect'] = 'DieSchittigs\\SttgsRedirect\\Models\\AliasindexModel';
 
+if (TL_MODE=="BE") {
+    $GLOBALS['TL_CSS'][] = 'bundles/contaoredirect/backend.css';
+}
 
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['system']['sttgs-redirects'] = array
-(
-    'tables'      => array('tl_redirect'),
-);
+$GLOBALS['BE_MOD']['redirects'] = [
+    'sttgs-redirects' => [
+        'tables' => ['tl_redirect'],
+    ],
+    'aliasindex' => [
+        'tables' => ['tl_aliasindex'],
+        'checkStatus' => ['\DieSchittigs\SttgsRedirect\redirectClass' , 'checkStatus']
+    ] 
+];
 
 
 

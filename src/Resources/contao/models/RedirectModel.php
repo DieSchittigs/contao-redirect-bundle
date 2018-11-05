@@ -1,12 +1,5 @@
 <?php
 
-/**
- * kreuzfahrt.de Modules Set
- *
- * Copyright (c) 2016 Die Schittigs
- *
- * @license LGPL-3.0+
- */
 
 namespace DieSchittigs\SttgsRedirect\Models;
 

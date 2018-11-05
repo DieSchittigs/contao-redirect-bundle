@@ -1,2 +1,10 @@
-#tl_navigation .group-tuerchen {
+#tl_navigation .group-redirects {
     background: url(group-sttgs.svg) 3px 2px no-repeat;
+}
+.header_check_status {
+    padding: 3px 0 3px 21px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    margin-left: 15px;
+    background-image: url(../../system/themes/flexible/icons/manager.svg);
+}
