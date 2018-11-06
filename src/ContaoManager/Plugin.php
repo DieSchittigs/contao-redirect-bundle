@@ -19,7 +19,10 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(ContaoRedirectBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+                ->setLoadAfter([
+                    'Contao\CoreBundle\ContaoCoreBundle',
+                    'Contao\CalendarBundle\ContaoCalendarBundle'
+                ])
                 ->setReplace(['redirects']),
         ];
     }

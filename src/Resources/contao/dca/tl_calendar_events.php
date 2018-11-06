@@ -2,7 +2,6 @@
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['config']['onsubmit_callback'][] = ['tl_calendar_events_redirect', 'notifyAliasChange'];
 
-
 class tl_calendar_events_redirect extends \contao\Backend
 {
     // Check if the alias is not in the alias index or if it has changed and insert it
