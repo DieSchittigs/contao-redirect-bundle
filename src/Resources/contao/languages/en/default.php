@@ -1,4 +1,8 @@
 <?php
+
+$GLOBALS['TL_LANG']['MOD']['readerMessageInfo'] = 'The reader "%s" (%s, ID %d) refers to this Page. An automatic redirect has been added';
+
+
 $GLOBALS['TL_LANG']['MOD']['err']['100'] = 'Continue';
 $GLOBALS['TL_LANG']['MOD']['err']['101'] = 'Switching Protocols';
 $GLOBALS['TL_LANG']['MOD']['err']['102'] = 'Processing';

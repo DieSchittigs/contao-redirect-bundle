@@ -1,8 +1,6 @@
 <?php
 
 
-namespace DieSchittigs\SttgsRedirect\Models;
-
 class RedirectModel extends \Contao\Model {
 
 	/**

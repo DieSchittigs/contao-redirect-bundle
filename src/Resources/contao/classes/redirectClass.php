@@ -60,7 +60,7 @@ class redirectClass extends \Frontend
             $objIndex = $this->Database->query("SELECT * FROM tl_search WHERE url = '". \Environment::get('uri') . "'");
 
             if(!$objIndex->numRows){
-                $objRedirect = \DieSchittigs\SttgsRedirect\Models\RedirectModel::findPublishedByUrl($request);
+                $objRedirect = \RedirectModel::findPublishedByUrl($request);
 
                 if($objRedirect->type == "404"){
                     throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
@@ -74,7 +74,7 @@ class redirectClass extends \Frontend
             }
             
             ## Regex Weiterleitungen probieren
-            $objRedirect = \DieSchittigs\SttgsRedirect\Models\RedirectModel::findPublishedByType('rgxp', array('order' => 'sorting'));
+            $objRedirect = \RedirectModel::findPublishedByType('rgxp', array('order' => 'sorting'));
             if($objRedirect === null) return;
 
             while($objRedirect->next()) {
@@ -83,11 +83,13 @@ class redirectClass extends \Frontend
 
                 if(!$search OR !$replace) continue;
                 
+
                 if(preg_match($search, $request)) {
                     $strRedirect = preg_replace($search, $replace, $request);
                     \Controller::redirect($strRedirect, $objRedirect->status);
                     die;
                 }
+
             }
             return;
         }
