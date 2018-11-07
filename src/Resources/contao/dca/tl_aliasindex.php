@@ -127,6 +127,7 @@ class tl_aliasindex extends Backend
             case '1': $color = '#6ba7a8'; break;
             case '2': $color = '#619166'; break;
             case '3': $color = '#616f91'; break;
+            case '4': $color = '#bf4a4f'; break;
             case '5': $color = '#d68b21'; break;
         }
 
