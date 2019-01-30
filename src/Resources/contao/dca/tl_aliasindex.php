@@ -72,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_aliasindex'] = [
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50 clr', 'disabled' => true),
-			'sql'                     => "varchar(128) BINARY NOT NULL default ''"
+			'sql'                     => "varchar(128) NOT NULL default ''"
         ],
         'url' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_aliasindex']['url'],
@@ -80,7 +80,7 @@ $GLOBALS['TL_DCA']['tl_aliasindex'] = [
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50 clr', 'disabled' => true),
-			'sql'                     => "text NULL"
+			'sql'                     => "varchar(255) NOT NULL default ''"
         ],
         'currentId' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_aliasindex']['currentId'],
@@ -98,7 +98,7 @@ $GLOBALS['TL_DCA']['tl_aliasindex'] = [
             'filter'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50 clr', 'disabled' => true),
-			'sql'                     => "varchar(128) BINARY NOT NULL default ''"
+			'sql'                     => "varchar(128) NOT NULL default ''"
         ],
         'status' => [
             'label'                   => &$GLOBALS['TL_LANG']['tl_aliasindex']['status'],

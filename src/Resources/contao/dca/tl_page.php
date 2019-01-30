@@ -1,27 +1,30 @@
 <?php
 
-$GLOBALS['TL_DCA']['tl_page']['config']['onsubmit_callback'][] = ['tl_page_redirect', 'notifyAliasChange'];
+//$GLOBALS['TL_DCA']['tl_page']['config']['onsubmit_callback'][] = ['tl_page_redirect', 'notifyAliasChange'];
+
+$GLOBALS['TL_DCA']['tl_page']['fields']['alias']['save_callback'][] = ['tl_page_redirect', 'notifyAliasChange'];
 
 
 class tl_page_redirect extends \contao\Backend
 {
     // Check if the alias is not in the alias index or if it has changed and insert it
-    public function notifyAliasChange(DataContainer $dc)
+    public function notifyAliasChange($varValue, DataContainer $dc)
     {
+        
         // Check if the URL is already in the index
-        $strUrl = \PageModel::findById($dc->activeRecord->id)->getAbsoluteUrl();
+        $strUrl = \PageModel::findById($dc->id)->getAbsoluteUrl();
         $objAlias = \AliasindexModel::findByUrl($strUrl,['order' => 'tstamp DESC']);
 
-        if($objAlias !== NULL) return;
+        if($objAlias !== NULL) return $varValue;
 
         // get the REAL old element by ID
-        $objAlias = \AliasindexModel::findByCurrentId($dc->activeRecord->id,['order' => 'tstamp DESC']);
+        $objAlias = \AliasindexModel::findByCurrentId($dc->id,['order' => 'tstamp DESC']);
         
         // Insert new Record
         $alias = New \AliasindexModel();
 
-        $alias->alias = $dc->activeRecord->alias;
-        $alias->currentId = $dc->activeRecord->id;
+        $alias->alias = $varValue;
+        $alias->currentId = $dc->id;
         $alias->ptable = $dc->table;
         $alias->tstamp = time();
         $alias->url = $strUrl;
@@ -30,10 +33,12 @@ class tl_page_redirect extends \contao\Backend
         // Check for existing readers for this page
         // only when there is an entry
         
-        if ($objAlias === NULL OR $objAlias->alias == $dc->activeRecord->alias) return;
+        if ($objAlias === NULL OR $objAlias->alias == $varValue) return $varValue;
 
-        $arrReader = $this->checkReader($dc->activeRecord->id);
+        $arrReader = $this->checkReader($dc->id);
+
         
+
         if(is_array($arrReader)){
 
             foreach($arrReader as $reader){
@@ -42,11 +47,11 @@ class tl_page_redirect extends \contao\Backend
                 );
 
                 // Insert Redirect
-                $redirect['newUrl'] = \PageModel::findById($dc->activeRecord->id)->getFrontendUrl();
+                $redirect['newUrl'] = \PageModel::findById($dc->id)->getFrontendUrl();
 
                 $redirect['regexSearch'] = '/^'.
                     str_replace(
-                        [$dc->activeRecord->alias.'.html', '/'], 
+                        [$varValue.'.html', '/'], 
                         [$objAlias->alias . '/(.+?)\.html', '\/'],
                         $redirect['newUrl']
                     ).'$/';
@@ -60,7 +65,7 @@ class tl_page_redirect extends \contao\Backend
                 $objRedirect->save();
             }
         }
-        return;
+        return $varValue;
     }
 
     public function checkReader($intId)
